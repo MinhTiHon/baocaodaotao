@@ -33,122 +33,6 @@
     -webkit-font-smoothing: antialiased;
   }
 
-  /* ─── MODAL ─── */
-  .modal {
-    display: none;
-    position: fixed;
-    z-index: 1000;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0,0,0,0.4);
-    animation: fadeIn 0.3s ease-out;
-  }
-  .modal.show { display: flex; align-items: center; justify-content: center; }
-  @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-  .modal-content {
-    background-color: var(--white);
-    padding: 40px;
-    border-radius: 12px;
-    width: 90%;
-    max-width: 500px;
-    box-shadow: 0 4px 40px rgba(0,0,0,.15);
-    animation: slideIn 0.3s ease-out;
-  }
-  @keyframes slideIn { from { transform: translateY(-50px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
-  .modal-close {
-    color: var(--gray2);
-    float: right;
-    font-size: 28px;
-    font-weight: bold;
-    cursor: pointer;
-    line-height: 20px;
-  }
-  .modal-close:hover { color: var(--black); }
-  .modal h2 {
-    font-family: var(--font-head);
-    font-weight: 800;
-    font-size: 24px;
-    margin-bottom: 20px;
-    color: var(--black);
-  }
-  .form-group {
-    margin-bottom: 16px;
-  }
-  .form-group label {
-    display: block;
-    font-family: var(--font-ui);
-    font-weight: 600;
-    font-size: 13px;
-    color: var(--gray1);
-    margin-bottom: 6px;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-  }
-  .form-group input,
-  .form-group select,
-  .form-group textarea {
-    width: 100%;
-    padding: 11px 14px;
-    font-family: var(--font-body);
-    font-size: 14px;
-    border: 1px solid var(--gray3);
-    border-radius: 6px;
-    transition: border-color 0.2s;
-  }
-  .form-group input:focus,
-  .form-group select:focus,
-  .form-group textarea:focus {
-    outline: none;
-    border-color: var(--red);
-    box-shadow: 0 0 0 3px rgba(227,6,19,0.1);
-  }
-  .form-group textarea { resize: vertical; min-height: 80px; }
-  .form-buttons {
-    display: flex;
-    gap: 12px;
-    margin-top: 24px;
-  }
-  .form-buttons button {
-    flex: 1;
-    padding: 12px 20px;
-    font-family: var(--font-ui);
-    font-weight: 700;
-    font-size: 13px;
-    border-radius: 6px;
-    border: none;
-    cursor: pointer;
-    transition: all 0.2s;
-  }
-  .btn-submit {
-    background: var(--red);
-    color: white;
-  }
-  .btn-submit:hover { background: var(--red-dark); box-shadow: 0 4px 20px rgba(227,6,19,.35); }
-  .btn-cancel {
-    background: var(--gray3);
-    color: var(--gray1);
-  }
-  .btn-cancel:hover { background: var(--gray2); color: white; }
-  .form-message {
-    padding: 12px 14px;
-    border-radius: 6px;
-    margin-top: 12px;
-    font-size: 13px;
-    display: none;
-  }
-  .form-message.success {
-    background: rgba(40,200,64,0.1);
-    color: #28c840;
-    display: block;
-  }
-  .form-message.error {
-    background: rgba(227,6,19,0.1);
-    color: var(--red);
-    display: block;
-  }
-
   /* ─── NAV ─── */
   nav {
     position: sticky; top: 0; z-index: 100;
@@ -517,55 +401,10 @@
     section { padding: 56px 20px; }
     .hero h1 { font-size: 28px; }
     .btn-lg { padding: 14px 28px; font-size: 14px; }
-    .modal-content { padding: 30px 20px; }
   }
 </style>
 </head>
 <body>
-
-<!-- REGISTRATION MODAL -->
-<div id="registrationModal" class="modal">
-  <div class="modal-content">
-    <span class="modal-close">&times;</span>
-    <h2>📝 Đăng Ký Tham Gia</h2>
-    <form id="registrationForm">
-      <div class="form-group">
-        <label for="employeeId">Mã Nhân Viên *</label>
-        <input type="text" id="employeeId" name="employeeId" placeholder="Nhập mã nhân viên" required>
-      </div>
-      <div class="form-group">
-        <label for="fullName">Họ & Tên *</label>
-        <input type="text" id="fullName" name="fullName" placeholder="Nhập họ tên đầy đủ" required>
-      </div>
-      <div class="form-group">
-        <label for="email">Email *</label>
-        <input type="email" id="email" name="email" placeholder="Nhập email liên hệ" required>
-      </div>
-      <div class="form-group">
-        <label for="aiSkillLevel">Đánh Giá Kỹ Năng AI *</label>
-        <select id="aiSkillLevel" name="aiSkillLevel" required>
-          <option value="">-- Chọn mức độ --</option>
-          <option value="Beginner">Mới bắt đầu (Beginner)</option>
-          <option value="Intermediate">Trung bình (Intermediate)</option>
-          <option value="Advanced">Nâng cao (Advanced)</option>
-        </select>
-      </div>
-      <div class="form-group">
-        <label for="department">Phòng/Ban</label>
-        <input type="text" id="department" name="department" placeholder="Nhập phòng/ban (tùy chọn)">
-      </div>
-      <div class="form-group">
-        <label for="notes">Ghi Chú Thêm</label>
-        <textarea id="notes" name="notes" placeholder="Ghi chú hoặc câu hỏi thêm (tùy chọn)"></textarea>
-      </div>
-      <div id="formMessage" class="form-message"></div>
-      <div class="form-buttons">
-        <button type="submit" class="btn-submit">Gửi Đăng Ký</button>
-        <button type="button" class="btn-cancel" id="cancelBtn">Hủy</button>
-      </div>
-    </form>
-  </div>
-</div>
 
 <!-- NAV -->
 <nav id="navbar">
@@ -582,7 +421,7 @@
       <li><a href="#steps">Quyền lợi</a></li>
       <li><a href="#classinfo">Thông tin lớp học</a></li>
     </ul>
-    <a href="#" class="btn btn-red" style="font-size:13px;padding:10px 20px;" id="navRegisterBtn">ĐĂNG KÝ NGAY</a>
+    <a href="https://docs.google.com/forms/d/e/1FAIpQLSf-ALe0cwXFafOC3unhS6vPCeqPZ8mr6NgOK0nsEx2Yrwcexw/viewform" class="btn btn-red" style="font-size:13px;padding:10px 20px;">ĐĂNG KÝ NGAY</a>
     <div class="nav-hamburger" id="hamburger">
       <span></span><span></span><span></span>
     </div>
@@ -599,7 +438,7 @@
       <h1>HƯỚNG DẪN<br>TẠO SLIDE<br>BẰNG <span>AI</span><br>CƠ BẢN & NÂNG CAO</h1>
       <p class="hero-sub">Ứng dụng AI thông minh – Tối ưu hóa thời gian thiết kế slide và landing page cho công việc hàng ngày của bạn!</p>
       <div class="hero-cta-group">
-        <a href="#" class="btn btn-red btn-lg" id="heroRegisterBtn">ĐĂNG KÝ THAM GIA NGAY</a>
+        <a href="https://docs.google.com/forms/d/e/1FAIpQLSf-ALe0cwXFafOC3unhS6vPCeqPZ8mr6NgOK0nsEx2Yrwcexw/viewform" class="btn btn-red btn-lg">ĐĂNG KÝ THAM GIA NGAY</a>
         <a href="#curriculum" class="btn btn-outline-white btn-lg">Xem chương trình</a>
       </div>
       <p class="hero-note">📅 Thứ 6, ngày 08/05/2026 &nbsp;·&nbsp; 8h30 – 12h00</p>
@@ -792,7 +631,7 @@
     <div class="reveal">
       <h2>Nâng cấp kỹ năng AI của bạn ngay hôm nay!</h2>
       <p class="cta-sub">Đừng bỏ lỡ cơ hội học hỏi và phát triển cùng Viettel Networks.</p>
-      <a href="#" class="btn btn-dark btn-lg" id="ctaRegisterBtn">ĐĂNG KÝ THAM GIA NGAY</a>
+      <a href="https://docs.google.com/forms/d/e/1FAIpQLSf-ALe0cwXFafOC3unhS6vPCeqPZ8mr6NgOK0nsEx2Yrwcexw/viewform" class="btn btn-dark btn-lg">ĐĂNG KÝ THAM GIA NGAY</a>
       <p class="cta-micro">⏰ Hạn chót đăng ký: Ngày 06/05/2026</p>
       <div class="cta-note">
         <strong>Lưu ý:</strong> Hãy hoàn thành form khảo sát bao gồm Mã nhân viên, Họ &amp; Tên và đánh giá kỹ năng AI để xác nhận đăng ký.
@@ -825,108 +664,6 @@
 </footer>
 
 <script>
-  // Modal Elements
-  const modal = document.getElementById('registrationModal');
-  const form = document.getElementById('registrationForm');
-  const messageDiv = document.getElementById('formMessage');
-  const closeBtn = document.querySelector('.modal-close');
-  const cancelBtn = document.getElementById('cancelBtn');
-  
-  // Register buttons
-  const navRegisterBtn = document.getElementById('navRegisterBtn');
-  const heroRegisterBtn = document.getElementById('heroRegisterBtn');
-  const ctaRegisterBtn = document.getElementById('ctaRegisterBtn');
-
-  // Open modal
-  function openModal() {
-    modal.classList.add('show');
-    document.body.style.overflow = 'hidden';
-  }
-
-  // Close modal
-  function closeModal() {
-    modal.classList.remove('show');
-    document.body.style.overflow = 'auto';
-    form.reset();
-    messageDiv.textContent = '';
-    messageDiv.className = 'form-message';
-  }
-
-  // Event listeners for register buttons
-  navRegisterBtn.addEventListener('click', (e) => { e.preventDefault(); openModal(); });
-  heroRegisterBtn.addEventListener('click', (e) => { e.preventDefault(); openModal(); });
-  ctaRegisterBtn.addEventListener('click', (e) => { e.preventDefault(); openModal(); });
-
-  // Close modal
-  closeBtn.addEventListener('click', closeModal);
-  cancelBtn.addEventListener('click', closeModal);
-  
-  // Close modal when clicking outside
-  window.addEventListener('click', (e) => {
-    if (e.target === modal) closeModal();
-  });
-
-  // Handle form submission
-  form.addEventListener('submit', (e) => {
-    e.preventDefault();
-    
-    const employeeId = document.getElementById('employeeId').value.trim();
-    const fullName = document.getElementById('fullName').value.trim();
-    const email = document.getElementById('email').value.trim();
-    const aiSkillLevel = document.getElementById('aiSkillLevel').value;
-    const department = document.getElementById('department').value.trim();
-    const notes = document.getElementById('notes').value.trim();
-
-    // Validation
-    if (!employeeId || !fullName || !email || !aiSkillLevel) {
-      messageDiv.textContent = '❌ Vui lòng điền đầy đủ thông tin bắt buộc (*)';
-      messageDiv.className = 'form-message error';
-      return;
-    }
-
-    // Email validation
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(email)) {
-      messageDiv.textContent = '❌ Email không hợp lệ!';
-      messageDiv.className = 'form-message error';
-      return;
-    }
-
-    // Collect form data
-    const formData = {
-      employeeId,
-      fullName,
-      email,
-      aiSkillLevel,
-      department,
-      notes,
-      registrationDate: new Date().toLocaleString('vi-VN'),
-      courseDate: '08/05/2026'
-    };
-
-    // Save to localStorage (for demo purposes)
-    try {
-      let registrations = JSON.parse(localStorage.getItem('registrations')) || [];
-      registrations.push(formData);
-      localStorage.setItem('registrations', JSON.stringify(registrations));
-
-      // Show success message
-      messageDiv.textContent = '✅ Đăng ký thành công! Chúng tôi sẽ liên hệ với bạn sớm.';
-      messageDiv.className = 'form-message success';
-
-      // Clear form and close after 2 seconds
-      setTimeout(() => {
-        closeModal();
-      }, 2000);
-
-      console.log('Registration saved:', formData);
-    } catch (error) {
-      messageDiv.textContent = '❌ Lỗi lưu dữ liệu. Vui lòng thử lại!';
-      messageDiv.className = 'form-message error';
-      console.error('Error:', error);
-    }
-  });
-
   // Sticky nav
   const navbar = document.getElementById('navbar');
   window.addEventListener('scroll', () => {
